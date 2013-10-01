@@ -15,9 +15,16 @@ describe WardrobeItemsController do
   describe 'GET show' do
     it "assigns the requested wardrobe item as @wardrobe_item" do
       wardrobe_item = WardrobeItem.create valid_attributes
-      get :show, { id: wardrobe_item.id }
+      get :show, { id: wardrobe_item }
 
       expect(assigns('wardrobe_item')).to eq(wardrobe_item)
+    end
+  end
+
+  describe 'GET new' do
+   it "assigns a new wardrobe_item as @wardrobe_item" do
+      get :new
+      expect(assigns(:wardrobe_item)).to be_a_new(WardrobeItem)
     end
   end
 
@@ -30,7 +37,7 @@ describe WardrobeItemsController do
   end
 
   describe "POST create" do
-    describe "with valid params" do
+    context "with valid params" do
       it "creates a new WardrobeItem" do
         expect {
           post :create, {:wardrobe_item => valid_attributes}
@@ -49,7 +56,7 @@ describe WardrobeItemsController do
       end
     end
 
-    describe "with invalid params" do
+    context "with invalid params" do
       it "assigns a newly created but unsaved wardrobe_item as @wardrobe_item" do
         # Trigger the behavior that occurs when invalid params are submitted
         allow_any_instance_of(WardrobeItem).to receive(:save).and_return(false)
@@ -67,7 +74,7 @@ describe WardrobeItemsController do
   end
 
   describe "PUT update" do
-    describe "with valid params" do
+    context "with valid params" do
       it "updates the requested wardrobe_item" do
         wardrobe_item = WardrobeItem.create valid_attributes
         # Assuming there are no other wardrobe_items in the database, this
@@ -91,7 +98,7 @@ describe WardrobeItemsController do
       end
     end
 
-    describe "with invalid params" do
+    context "with invalid params" do
       it "assigns the wardrobe_item as @wardrobe_item" do
         wardrobe_item = WardrobeItem.create valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
