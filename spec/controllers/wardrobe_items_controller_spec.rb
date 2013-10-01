@@ -75,36 +75,36 @@ describe WardrobeItemsController do
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
         WardrobeItem.any_instance.should_receive(:update).with({ "garment" => "shoes" })
-        put :update, {:id => wardrobe_item.to_param, :wardrobe_item => { "garment" => "shoes" }}
+        put :update, {:id => wardrobe_item, :wardrobe_item => { "garment" => "shoes" }}
       end
 
       it "assigns the requested wardrobe_item as @wardrobe_item" do
-        wardrobe_item = WardrobeItem.create! valid_attributes
-        put :update, {:id => wardrobe_item.to_param, :wardrobe_item => valid_attributes}
+        wardrobe_item = WardrobeItem.create valid_attributes
+        put :update, {:id => wardrobe_item, :wardrobe_item => valid_attributes}
         assigns(:wardrobe_item).should eq(wardrobe_item)
       end
 
       it "redirects to the wardrobe_item" do
-        wardrobe_item = WardrobeItem.create! valid_attributes
-        put :update, {:id => wardrobe_item.to_param, :wardrobe_item => valid_attributes}
+        wardrobe_item = WardrobeItem.create valid_attributes
+        put :update, {:id => wardrobe_item, :wardrobe_item => valid_attributes}
         response.should redirect_to(wardrobe_item)
       end
     end
 
     describe "with invalid params" do
       it "assigns the wardrobe_item as @wardrobe_item" do
-        wardrobe_item = WardrobeItem.create! valid_attributes
+        wardrobe_item = WardrobeItem.create valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         WardrobeItem.any_instance.stub(:save).and_return(false)
-        put :update, {:id => wardrobe_item.to_param, :wardrobe_item => { "season" => "invalid value" }}
+        put :update, {:id => wardrobe_item, :wardrobe_item => { "season" => "invalid value" }}
         assigns(:wardrobe_item).should eq(wardrobe_item)
       end
 
       it "re-renders the 'edit' template" do
-        wardrobe_item = WardrobeItem.create! valid_attributes
+        wardrobe_item = WardrobeItem.create valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         WardrobeItem.any_instance.stub(:save).and_return(false)
-        put :update, {:id => wardrobe_item.to_param, :wardrobe_item => { "season" => "invalid value" }}
+        put :update, {:id => wardrobe_item, :wardrobe_item => { "season" => "invalid value" }}
         response.should render_template("edit")
       end
     end
