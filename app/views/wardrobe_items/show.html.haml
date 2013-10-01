@@ -1,0 +1,17 @@
+%p#garment.attribute
+  %strong Garment:
+  = @wardrobe_item.garment
+
+%p#label.attribute
+  %strong Label:
+  = @wardrobe_item.label
+
+%p#season.attribute
+  %strong Season:
+  = @wardrobe_item.season
+
+%p#color.attribute
+  %strong Color:
+  = @wardrobe_item.color
+
+= link_to 'Back', wardrobe_items_path
