@@ -1,0 +1,19 @@
+%h1 Listing wardrobe items
+
+%table
+  %thead
+    %tr
+      %th Garment
+      %th Label
+      %th Season
+      %th Color
+      %th 
+      
+  %tbody
+    - @wardrobe_items.each do |wardrobe_item|
+      %tr
+        %td= wardrobe_item.garment
+        %td= wardrobe_item.label
+        %td= wardrobe_item.season
+        %td= wardrobe_item.color
+        %td= link_to 'Show', wardrobe_item
