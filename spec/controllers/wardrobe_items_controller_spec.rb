@@ -75,26 +75,25 @@ describe WardrobeItemsController do
 
   describe "PUT update" do
     context "with valid params" do
-      it "updates the requested wardrobe_item" do
-        wardrobe_item = WardrobeItem.create valid_attributes
-        # Assuming there are no other wardrobe_items in the database, this
-        # specifies that the WardrobeItem created on the previous line
-        # receives the :update_attributes message with whatever params are
-        # submitted in the request.
-        WardrobeItem.any_instance.should_receive(:update).with({ "garment" => "shoes" })
-        put :update, {:id => wardrobe_item, :wardrobe_item => { "garment" => "shoes" }}
-      end
-
       it "assigns the requested wardrobe_item as @wardrobe_item" do
         wardrobe_item = WardrobeItem.create valid_attributes
         put :update, {:id => wardrobe_item, :wardrobe_item => valid_attributes}
-        assigns(:wardrobe_item).should eq(wardrobe_item)
+        
+        expect(assigns(:wardrobe_item)).to eq(wardrobe_item)
       end
 
       it "redirects to the wardrobe_item" do
         wardrobe_item = WardrobeItem.create valid_attributes
         put :update, {:id => wardrobe_item, :wardrobe_item => valid_attributes}
-        response.should redirect_to(wardrobe_item)
+        
+        expect(response).to redirect_to(wardrobe_item)
+      end
+
+      it "updates the requested wardrobe_item" do
+        wardrobe_item = WardrobeItem.create valid_attributes
+        expect_any_instance_of(WardrobeItem).to receive(:update).with({ "garment" => "shoes" })
+        
+        put :update, {:id => wardrobe_item, :wardrobe_item => { "garment" => "shoes" }}
       end
     end
 
@@ -102,18 +101,18 @@ describe WardrobeItemsController do
       it "assigns the wardrobe_item as @wardrobe_item" do
         wardrobe_item = WardrobeItem.create valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
-        WardrobeItem.any_instance.stub(:save).and_return(false)
-        put :update, {:id => wardrobe_item, :wardrobe_item => { "season" => "invalid value" }}
-        assigns(:wardrobe_item).should eq(wardrobe_item)
+        allow_any_instance_of(WardrobeItem).to receive(:save).and_return(false)
+        put :update, {:id => wardrobe_item, :wardrobe_item => { "garment" => "invalid value" }}
+        expect(assigns(:wardrobe_item)).to eq(wardrobe_item)
       end
 
-      it "re-renders the 'edit' template" do
-        wardrobe_item = WardrobeItem.create valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
-        WardrobeItem.any_instance.stub(:save).and_return(false)
-        put :update, {:id => wardrobe_item, :wardrobe_item => { "season" => "invalid value" }}
-        response.should render_template("edit")
-      end
+    #   it "re-renders the 'edit' template" do
+    #     wardrobe_item = WardrobeItem.create valid_attributes
+    #     # Trigger the behavior that occurs when invalid params are submitted
+    #     allow_any_instance_of(WardrobeItem).to receive(:save).and_return(false)
+    #     put :update, {:id => wardrobe_item, :wardrobe_item => { "garment" => "invalid value" }}
+    #     expect(response).to render_template("edit")
+    #   end
     end
   end
 end
