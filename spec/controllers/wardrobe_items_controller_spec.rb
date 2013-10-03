@@ -64,4 +64,14 @@ describe WardrobeItemsController do
       end
     end
   end
+
+  describe 'GET edit' do
+    it "assigns the requested wardrobe item as @wardrobe_item" do
+      wardrobe_item = WardrobeItem.create valid_attributes
+      get :edit, { id: wardrobe_item }
+
+      expect(assigns('wardrobe_item')).to eq(wardrobe_item)
+    end
+  end
+
 end
