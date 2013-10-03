@@ -80,11 +80,18 @@ describe WardrobeItemsController do
       put :update, {:id => wardrobe_item, :wardrobe_item => valid_attributes}
       expect(assigns(:wardrobe_item)).to eq(wardrobe_item)
     end
-    
+
     it "redirects to the wardrobe_item" do
       wardrobe_item = WardrobeItem.create valid_attributes
       put :update, {:id => wardrobe_item, :wardrobe_item => valid_attributes}
       expect(response).to redirect_to(wardrobe_item)
+    end
+
+    it "updates the requested wardrobe_item" do
+      wardrobe_item = WardrobeItem.create valid_attributes
+      expect_any_instance_of(WardrobeItem).to receive(:update).with({ "garment" => "shoes" })
+
+      put :update, {:id => wardrobe_item, :wardrobe_item => { "garment" => "shoes" }}
     end
   end
 
