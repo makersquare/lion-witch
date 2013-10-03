@@ -1,11 +1,6 @@
 class WardrobeItemsController < ApplicationController
   def index
     @wardrobe_items = WardrobeItem.all
-
-    respond_to do |format|
-      format.html
-      format.json { render json: @wardrobe_items }
-    end
   end
 
   def show
@@ -48,7 +43,8 @@ class WardrobeItemsController < ApplicationController
   end
 
   private
-    def wardrobe_item_params
-      params.require(:wardrobe_item).permit(:garment, :label, :season, :color)
-    end
+  
+  def wardrobe_item_params
+    params.require(:wardrobe_item).permit(:garment, :label, :season, :color)
+  end
 end

@@ -8,6 +8,8 @@
       %th Season
       %th Color
       %th
+      %th
+      %th
   
   %tbody
     - @wardrobe_items.each do |wardrobe_item|
@@ -17,5 +19,7 @@
         %td= wardrobe_item.season
         %td= wardrobe_item.color
         %td= link_to 'Show', wardrobe_item
-        %td= link_to 'Edit', edit_wardrobe_item(wardrobe_item)
-        %td= link_to 'Delete', delete_wardrobe_item(wardrobe_item)
+        %td= link_to 'Edit', edit_wardrobe_item_path(wardrobe_item)
+        %td= link_to 'Delete', wardrobe_item_path(wardrobe_item), :method => :delete
+
+= link_to 'New Wardrobe Item', new_wardrobe_item_path

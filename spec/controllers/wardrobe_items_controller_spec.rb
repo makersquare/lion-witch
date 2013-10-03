@@ -106,13 +106,29 @@ describe WardrobeItemsController do
         expect(assigns(:wardrobe_item)).to eq(wardrobe_item)
       end
 
-    #   it "re-renders the 'edit' template" do
-    #     wardrobe_item = WardrobeItem.create valid_attributes
-    #     # Trigger the behavior that occurs when invalid params are submitted
-    #     allow_any_instance_of(WardrobeItem).to receive(:save).and_return(false)
-    #     put :update, {:id => wardrobe_item, :wardrobe_item => { "garment" => "invalid value" }}
-    #     expect(response).to render_template("edit")
-    #   end
+      it "re-renders the 'edit' template" do
+        wardrobe_item = WardrobeItem.create valid_attributes
+        # Trigger the behavior that occurs when invalid params are submitted
+        allow_any_instance_of(WardrobeItem).to receive(:save).and_return(false)
+        put :update, {:id => wardrobe_item, :wardrobe_item => { "garment" => "invalid value" }}
+        expect(response).to render_template("edit")
+      end
+    end
+  end
+
+  describe "DELETE destroy" do
+    it "destroys the requested wardrobe_item" do
+      wardrobe_item = WardrobeItem.create valid_attributes
+
+      expect {
+        post :create, {:wardrobe_item => valid_attributes}
+      }.to change(WardrobeItem, :count).by(1)
+    end
+
+    it "redirects to the wardrobe_items list" do
+      wardrobe_item = WardrobeItem.create valid_attributes
+      delete :destroy, {:id => wardrobe_item}
+      expect(response).to redirect_to(wardrobe_items_url)
     end
   end
 end
