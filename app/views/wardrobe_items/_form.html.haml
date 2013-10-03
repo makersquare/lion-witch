@@ -1,0 +1,25 @@
+- if @wardrobe_item.errors.any?
+  #error_explanation
+    %h2
+      = pluralize(@wardrobe_item.errors.count, "error") 
+      prohibited this post from being saved:
+
+    %ul
+      - @wardrobe_item.errors.full_messages.each do |msg|
+        %li= msg
+
+= form_for @wardrobe_item do |f|
+  .field
+    = f.label :garment
+    = f.text_field :garment
+  .field
+    = f.label :label
+    = f.text_field :label
+  .field
+    = f.label :season
+    = f.text_field :season
+  .field
+    = f.label :color
+    = f.text_field :color
+  .actions
+    = f.submit 'Save'
