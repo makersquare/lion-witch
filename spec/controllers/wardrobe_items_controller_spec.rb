@@ -94,8 +94,15 @@ describe WardrobeItemsController do
 
         put :update, {:id => wardrobe_item, :wardrobe_item => { "garment" => "shoes" }}
       end
-    end
-    context "with invalid params" do  
+    end  
+    context "with invalid params" do
+      it "assigns the wardrobe_item as @wardrobe_item" do
+        wardrobe_item = WardrobeItem.create valid_attributes
+        allow_any_instance_of(WardrobeItem).to receive(:save).and_return(false)
+
+        put :update, {:id => wardrobe_item, :wardrobe_item => { "garment" => "invalid value" }}
+        expect(assigns(:wardrobe_item)).to eq(wardrobe_item)
+      end
     end
 
   end
