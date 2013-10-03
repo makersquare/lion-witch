@@ -30,6 +30,10 @@ class WardrobeItemsController < ApplicationController
     @wardrobe_item = WardrobeItem.find(params[:id])
   end
 
+  def update
+    @wardrobe_item = WardrobeItem.find(params[:id])
+  end
+
   private
   
   def wardrobe_item_params
