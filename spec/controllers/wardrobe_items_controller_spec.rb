@@ -74,4 +74,12 @@ describe WardrobeItemsController do
     end
   end
 
+  describe "PUT update" do
+    it "assigns the requested wardrobe_item as @wardrobe_item" do
+      wardrobe_item = WardrobeItem.create valid_attributes
+      put :update, {:id => wardrobe_item, :wardrobe_item => valid_attributes}
+      expect(assigns(:wardrobe_item)).to eq(wardrobe_item)
+    end
+  end
+
 end
